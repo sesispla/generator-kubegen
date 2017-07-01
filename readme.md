@@ -1,8 +1,8 @@
 # Yeoman generator for you Kubernetes boilerplate code
 
-kubegen is a tool aims to simplify your Kubernetes day-to-day, writing the boilerplate code for you and letting you focus on the important things.
+kubegen is a tool that aims to simplify your Kubernetes day-to-day, writing the boilerplate code for you and letting you focus on the important things.
 
-kubegen is a Yeoman generator, so you'll need to have npm installed.
+kubegen is a [Yeoman](http://yeoman.io) generator, so you'll need to have [NodeJS](https://nodejs.org/) installed.
 
 # Installation
 
@@ -45,7 +45,6 @@ Welcome to Kubernetes Generator (kubegen)!
 Contribution is welcome! Just:
 
 - Fork this project
-
 - install the NPM dependencies:
 
 ```bash
@@ -63,6 +62,6 @@ npm link
 
 # Debugging
 
-For your conveniente, this project comes with a pre-built configuration to debug the solution with [Visual Studio Code](https://code.visualstudio.com). Just go to the "Debug" menu on the left, select "Yeoman generator" in the dropdown (besides "play button") and then click "play" to start debugging.
+For your conveniente, this project comes with a pre-built configuration to debug the solution with [Visual Studio Code](https://code.visualstudio.com). Just go to the "Debug" menu on the left, select "Yeoman generator" in the dropdown (beside "play button") and then click "play" to start debugging.
 
 ![debug with VSCode](docs/debug.png)
