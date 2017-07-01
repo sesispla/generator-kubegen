@@ -1,0 +1,25 @@
+{
+  "name": "npm",
+  "version": "0.1.0",
+  "description": "A Kubernetes code generation tool that deals with boilerplate code and let you focus on the important details",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sesispla/generator-kubegen.git"
+  },
+  "keywords": [
+    "kubernetes",
+    "yeoman",
+    "generator",
+    "yaml"
+  ],
+  "author": "Sergio Sisternes <sesispla@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sesispla/generator-kubegen/issues"
+  },
+  "homepage": "https://github.com/sesispla/generator-kubegen#readme"
+}
