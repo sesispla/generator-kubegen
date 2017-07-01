@@ -1,5 +1,5 @@
 {
-  "name": "npm",
+  "name": "generator-kubegen",
   "version": "0.1.0",
   "description": "A Kubernetes code generation tool that deals with boilerplate code and let you focus on the important details",
   "main": "index.js",
