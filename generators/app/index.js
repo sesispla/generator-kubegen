@@ -28,6 +28,7 @@ module.exports = class extends Generator {
         }])
         .concat(deployment.getPrompts())
         .concat(rc.getPrompts())
+        .concat(service.getPrompts())
         .concat(ingress.getPrompts());
 
         return this.prompt(prompts).then((answers) => {
