@@ -7,11 +7,12 @@ var deployment = require('../deployment/base.js');
 var rc = require('../replication-controller/base.js');
 var service = require('../service/base.js');
 
-
 module.exports = class extends Generator {
 
     constructor(args, opts) {
         super(args, opts);
+        this.argument('create', { required: false });
+        this.argument('delete', { required: false });
     }
 
     initializing() {
@@ -19,17 +20,21 @@ module.exports = class extends Generator {
     }
 
     prompting() {
-        var prompts = common.getPrompts()
-        .concat([{
-            name: 'podControllerType',
-            type: 'list',
-            message: 'Which type of Pod controller mechanism whould you like to use?',
-            choices: ['Deployment', 'Replication Controller', 'Other']
-        }])
-        .concat(deployment.getPrompts())
-        .concat(rc.getPrompts())
-        .concat(service.getPrompts())
+
+        var prompts = common.getPrompts();
+        if (!this.options.delete){        
+            prompts = prompts
+            .concat([{
+                name: 'podControllerType',
+                type: 'list',
+                message: 'Which type of Pod controller mechanism whould you like to use?',
+                choices: ['Deployment', 'Replication Controller', 'Other']
+            }])
+            .concat(deployment.getPrompts())
+            .concat(rc.getPrompts())
+            .concat(service.getPrompts())
         .concat(ingress.getPrompts());
+        }
 
         return this.prompt(prompts).then((answers) => {
             this.answers = answers;
@@ -43,6 +48,12 @@ module.exports = class extends Generator {
 
     writing() {
         this.destinationRoot("./" + this.answers.name);
+
+        if (this.options.delete)
+        {
+            return;
+        }
+                
         switch (this.answers.podControllerType) {
             case "Deployment":
                 deployment.write(this.fs, this.answers);
@@ -63,7 +74,14 @@ module.exports = class extends Generator {
 
     conflicts() {}
 
-    install() {}
+    install() {
+        if (this.options.create) {
+            common.spawnKubectlCommand(this, this.destinationRoot(), "create");
+        }
+        else if (this.options.delete) {
+            common.spawnKubectlCommand(this, this.destinationRoot(), "delete");
+        }
+    }
 
     end() {}
 };

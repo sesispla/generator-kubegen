@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+
 module.exports = {
 
     initializing(generator) {
@@ -32,5 +34,12 @@ module.exports = {
         }];
 
         return prompts;        
+    },
+    spawnKubectlCommand(generator, folder, command) {     
+        fs.readdir(folder, (err, files) => {
+            files.forEach(file => {
+                generator.spawnCommandSync("kubectl",[command, "-f", file]);
+            });
+        })
     }
 };
