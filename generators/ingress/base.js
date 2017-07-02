@@ -14,19 +14,25 @@ module.exports = {
                 name: answers.name,
                 namespace: answers.namespace
             },
-            rules: [{
-                host: answers.host,
-                http: {
-                    paths: [{
-                        path: answers.path,
-                        backend: {
-                            serviceName: answers.name,
-                            servicePort: answers.ingressPort
-                        }
-                    }]
-                }
-            }]
+            spec: {
+                rules: [{
+                    // host: answers.host,
+                    http: {
+                        paths: [{
+                            path: answers.path,
+                            backend: {
+                                serviceName: answers.name,
+                                servicePort: answers.ingressPort
+                            }
+                        }]
+                    }
+                }]
+            }
         };
+
+        if (answers.hosts) {
+            ingress.spec.rules.host = answers.host;
+        }
 
         var yamlContent = yaml.stringify(ingress, inline);
         fs.write('ing.yml', yamlContent);
