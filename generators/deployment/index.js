@@ -21,7 +21,6 @@ module.exports = class extends Generator {
 
         return this.prompt(prompts).then((answers) => {
             this.answers = answers;
-            answers.shouldExpose = answers.shouldExpose === 'yes';
         });
     }
 
