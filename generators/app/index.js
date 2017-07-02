@@ -13,6 +13,7 @@ module.exports = class extends Generator {
         super(args, opts);
         this.argument('create', { required: false });
         this.argument('delete', { required: false });
+        this.argument('apply', { required: false });
     }
 
     initializing() {
@@ -81,6 +82,9 @@ module.exports = class extends Generator {
         else if (this.options.delete) {
             common.spawnKubectlCommand(this, this.destinationRoot(), "delete");
         }
+        else if (this.options.apply) {
+            common.spawnKubectlCommand(this, this.destinationRoot(), "apply");
+        }        
     }
 
     end() {}
