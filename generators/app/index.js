@@ -2,7 +2,6 @@
 
 var Generator = require('yeoman-generator');
 var common = require('./base.js');
-var yaml = require('yamljs');
 var ingress = require('../ingress/base.js');
 var deployment = require('../deployment/base.js');
 var rc = require('../replication-controller/base.js');
