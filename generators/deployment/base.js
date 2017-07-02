@@ -57,6 +57,6 @@ module.exports = {
         return prompts;
     },
     when: function(answers) {
-        return answers.podControllerType === 'Deployment';
+        return answers.podControllerType === 'Deployment' || !answers.podControllerType;
     }
 }
