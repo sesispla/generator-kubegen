@@ -19,19 +19,19 @@ module.exports = {
                 ports: [{
                     port: answers.servicePort,
                     targetPort: answers.ContainerPort
-                }]
-            },
-            selector: {
-                app: answers.name
+                }],
+                selector: {
+                    app: answers.name
+                }
             }
         };
 
         var yamlContent = yaml.stringify(service, inline);
         fs.write('svc.yml', yamlContent);
     },
-    getPrompts: function () { 
-        var prompts = [{        
-            name: 'containerPort',
+    getPrompts: function () {
+        var prompts = [{
+            name: 'ContainerPort',
             type: 'input',
             message: '(Service) In which port is the Container listening?',
             default: 80,
@@ -41,7 +41,7 @@ module.exports = {
             filter: function (str) {
                 return parseInt(str);
             }
-        },{
+        }, {
             name: 'servicePort',
             type: 'input',
             message: '(Service) In which port should the Service listen?',
@@ -51,7 +51,7 @@ module.exports = {
             },
             filter: function (str) {
                 return parseInt(str);
-            }            
+            }
         }];
 
         return prompts;
