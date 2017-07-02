@@ -13,7 +13,6 @@ module.exports = class extends Generator {
 
     constructor(args, opts) {
         super(args, opts);
-        this.yamlIndent = 10;
     }
 
     initializing() {
