@@ -10,22 +10,29 @@ module.exports = {
         var deployment = {
             apiVersion: 'extensions/v1beta1',
             kind: 'Deployment',
-            labels: {
-                app: answers.name,
-                name: answers.name
-            },
-            name: answers.name,
-            namespace: answers.namespace,
-            replicas: answers.replicas,
             metadata: {
                 labels: {
-                    app: answers.name
-                }
-            },
-            containers: [{
+                    name: answers.name
+                },
                 name: answers.name,
-                image: answers.image
-            }]
+                namespace: answers.namespace
+            },
+            spec: {
+                replicas: answers.replicas,
+                template: {
+                    metadata: {
+                        labels: {
+                            app: answers.name
+                        }
+                    },
+                    spec:  {
+                        containers: [{
+                            name: answers.name,
+                            image: answers.image
+                        }]
+                    }
+                }
+            }
         };
 
         var yamlContent = yaml.stringify(deployment, inline);
@@ -56,7 +63,7 @@ module.exports = {
 
         return prompts;
     },
-    when: function(answers) {
+    when: function (answers) {
         return answers.podControllerType === 'Deployment' || !answers.podControllerType;
     }
 }
