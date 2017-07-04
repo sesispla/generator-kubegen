@@ -18,7 +18,7 @@ module.exports = {
             spec: {
                 ports: [{
                     port: answers.servicePort,
-                    targetPort: answers.ContainerPort
+                    targetPort: answers.containerPort
                 }],
                 selector: {
                     app: answers.name
@@ -31,7 +31,7 @@ module.exports = {
     },
     getPrompts: function () {
         var prompts = [{
-            name: 'ContainerPort',
+            name: 'containerPort',
             type: 'input',
             message: '(Service) In which port is the Container listening?',
             default: 80,
