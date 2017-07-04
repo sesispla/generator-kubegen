@@ -4,8 +4,9 @@
   "description": "A Kubernetes code generation tool that deals with boilerplate code and let you focus on the important details",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha ./tests/*.js"
   },
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sesispla/generator-kubegen.git"
