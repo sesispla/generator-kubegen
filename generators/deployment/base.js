@@ -48,9 +48,7 @@ module.exports = {
             name: 'replicas',
             message: '(Deployment) How much container replicas should be created?',
             default: 1,
-            validate: function (str) {
-                return str && !Number.isNaN(str) && Number.isInteger(str) ? true : false;
-            },
+            validate: val.isNumber,
             when: this.when,
             filter: val.parseInteger
         }];
