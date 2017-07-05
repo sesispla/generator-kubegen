@@ -1,5 +1,8 @@
 # Yeoman generator for you Kubernetes boilerplate code
 
+[![Build Status](https://travis-ci.org/sesispla/generator-kubegen.svg?branch=master)](https://travis-ci.org/sesispla/generator-kubegen) [![npm](https://img.shields.io/npm/dm/generator-kubegen.svg)](https://www.npmjs.com/package/generator-kubegen)
+![Version](https://img.shields.io/npm/v/generator-kubegen.svg)
+
 kubegen is a tool that aims to simplify your Kubernetes day-to-day, writing the boilerplate code for you and letting you focus on the important things.
 
 kubegen is a [Yeoman](http://yeoman.io) generator, so you'll need to have [NodeJS](https://nodejs.org/) installed.
