@@ -30,8 +30,8 @@ module.exports = {
             }
         };
 
-        if (answers.hosts) {
-            ingress.spec.rules.host = answers.host;
+        if (answers.host) {
+            ingress.spec.rules[0].host = answers.host;
         }
 
         var yamlContent = yaml.stringify(ingress, inline);
