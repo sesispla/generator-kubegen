@@ -1,12 +1,10 @@
 "use strict";
 
 var yaml = require('yamljs');
+const val = require('../validations.js');
 
 module.exports = {
-    write: function (fs, answers, inline) {
-        if (!inline) {
-            inline = 10;
-        }
+    write: function (fs, answers, inline = 10) {
         var ingress = {
             apiVersion: 'extensions/v1beta1',
             kind: 'Ingress',
@@ -67,12 +65,8 @@ module.exports = {
             when: function (answers) {
                 return answers.shouldExpose === 'yes';
             },
-            validate: function (str) {
-                return str && !Number.isNaN(str) && Number.isInteger(str) ? true : false;
-            },
-            filter: function (str) {
-                return parseInt(str);
-            }
+            validate: val.isNumber,
+            filter: val.parseInteger
         }];
 
         return prompts;

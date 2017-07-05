@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs');
+const val = require('../validations.js');
 
 module.exports = {
 
@@ -20,17 +21,13 @@ module.exports = {
             name: 'name',
             message: 'How the service should be named?',
             default: 'service1',
-            validate: function (str) {
-                return str ? true : false;
-            }
+            validate: val.isString
         }, {
             type: 'input',
             name: 'namespace',
             message: 'In which Namespace should be deployed?',
             default: 'default',
-            validate: function (str) {
-                return str ? true : false;
-            }
+            validate: val.isString
         }];
 
         return prompts;        
