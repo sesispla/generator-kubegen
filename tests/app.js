@@ -5,6 +5,7 @@ var helpers = require('yeoman-test');
 var assert = require('yeoman-assert');
 var path = require('path');
 var yaml = require('yamljs');
+var expect = require('expect');
 
 describe('Replication Controller without Ingress scenarios', function () {
 
@@ -106,8 +107,15 @@ describe('Replication Controller with Ingress scenarios', function () {
     it('File ing.yml is generated and filled in', function () {
         assert.file(['ing.yml']);
         var ing = yaml.load('ing.yml');
-        ing.apiVersion = 'extensions/v1beta1';
-        ing.kind = 'Ingress';
+        expect(ing.apiVersion).toBe('extensions/v1beta1');
+        expect(ing.kind).toBe('Ingress');
+        expect(ing.metadata.name).toBe('nginx');
+        expect(ing.metadata.namespace).toBe('default');
+        expect(ing.spec.rules).toExist('Expected rules to exist');
+        expect(ing.spec.rules[0].host).toBe('nginx.ingress.com');
+        expect(ing.spec.rules[0].http.paths[0].path).toBe('/');
+        expect(ing.spec.rules[0].http.paths[0].backend.serviceName).toBe('nginx');
+        expect(ing.spec.rules[0].http.paths[0].backend.servicePort).toBe(80);
     });
 
     it('File deployment.yml is not generated', function () {
@@ -207,8 +215,15 @@ describe('Deployment with Ingress scenarios', function () {
     it('File ing.yml is generated and filled in', function () {
         assert.file(['ing.yml']);
         var ing = yaml.load('ing.yml');
-        ing.apiVersion = 'extensions/v1beta1';
-        ing.kind = 'Ingress';
+        expect(ing.apiVersion).toBe('extensions/v1beta1');
+        expect(ing.kind).toBe('Ingress');
+        expect(ing.metadata.name).toBe('nginx');
+        expect(ing.metadata.namespace).toBe('default');
+        expect(ing.spec.rules).toExist('Expected rules to exist');
+        expect(ing.spec.rules[0].host).toBe('nginx.ingress.com');
+        expect(ing.spec.rules[0].http.paths[0].path).toBe('/');
+        expect(ing.spec.rules[0].http.paths[0].backend.serviceName).toBe('nginx');
+        expect(ing.spec.rules[0].http.paths[0].backend.servicePort).toBe(80);
     });
 
     it('File deployment.yml is generated and filled in', function () {
