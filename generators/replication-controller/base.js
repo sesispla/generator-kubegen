@@ -1,12 +1,10 @@
 "use strict";
 
 var yaml = require('yamljs');
+var val = require('../validations.js');
 
 module.exports = {
-    write: function (fs, answers, inline) {
-        if (!inline) {
-            inline = 10;
-        }
+    write: function (fs, answers, inline = 10) {
         var rc = {
             apiVersion: 'v1',
             kind: 'ReplicationController',
@@ -46,9 +44,7 @@ module.exports = {
             name: 'image',
             message: '(Replication Controller) Which Docker image should the Deployment use?',
             when: this.when,
-            validate: function (str) {
-                return str ? true : false;
-            }
+            validate: val.isString
         }, {
             type: 'input',
             name: 'replicas',
@@ -58,9 +54,7 @@ module.exports = {
                 return str && !Number.isNaN(str) && Number.isInteger(str) ? true : false;
             },
             when: this.when,
-            filter: function (str) {
-                return parseInt(str);
-            }
+            filter: val.parseInteger
         }];
 
         return prompts;

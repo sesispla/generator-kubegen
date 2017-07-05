@@ -1,13 +1,11 @@
 "use strict";
 
 var yaml = require('yamljs');
+const val = require('../validations.js');
 
 module.exports = {
-    write: function (fs, answers, inline) {
-        if (!inline) {
-            inline = 10;
-        }
-
+    write: function (fs, answers, inline = 10) {
+        
         var service = {
             apiVersion: 'v1',
             kind: 'Service',
@@ -35,23 +33,15 @@ module.exports = {
             type: 'input',
             message: '(Service) In which port is the Container listening?',
             default: 80,
-            validate: function (str) {
-                return str && !Number.isNaN(str) && Number.isInteger(str) ? true : false;
-            },
-            filter: function (str) {
-                return parseInt(str);
-            }
+            validate: val.isNumber,
+            filter: val.parseInteger
         }, {
             name: 'servicePort',
             type: 'input',
             message: '(Service) In which port should the Service listen?',
             default: 80,
-            validate: function (str) {
-                return str && !Number.isNaN(str) && Number.isInteger(str) ? true : false;
-            },
-            filter: function (str) {
-                return parseInt(str);
-            }
+            validate: val.isNumber,
+            filter: val.parseInteger
         }];
 
         return prompts;
