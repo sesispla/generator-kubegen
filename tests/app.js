@@ -20,8 +20,10 @@ beforeEach(function () {
         });
 });
 
-describe('Replication Controller scenarios', function () {
 
+
+describe('Replication Controller scenarios', function () {
+    
     it('generates file rc.yml', function () {
         assert.file(['rc.yml']);
         var rc = yaml.load('rc.yml');
@@ -41,7 +43,7 @@ describe('Replication Controller scenarios', function () {
     });
 
     it('do not generates file ing.yml', function () {
-        !assert.file(['svc.yml']);
+        assert.noFile(['ing.yml']);
     });
 
 });
