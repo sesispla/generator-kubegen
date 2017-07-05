@@ -64,7 +64,7 @@ module.exports = class extends Generator {
                 break;
             default:
                 this.log("Not supported yet!");
-                break;
+                return;
         }
 
         service.write(this.fs, this.answers);
