@@ -1,6 +1,6 @@
 {
   "name": "generator-kubegen",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "A Kubernetes code generation tool that deals with boilerplate code and let you focus on the important details",
   "main": "index.js",
   "scripts": {
@@ -23,11 +23,11 @@
   },
   "homepage": "https://github.com/sesispla/generator-kubegen#readme",
   "dependencies": {
-    "yeoman-generator": "^1.1.1"
+    "yeoman-generator": "^1.1.1",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "mocha": "^3.4.2",
-    "yamljs": "^0.3.0",
+    "mocha": "^3.4.2",    
     "yeoman-assert": "^3.0.0",
     "yeoman-generator": "^1.1.1",
     "yeoman-test": "^1.6.0",
