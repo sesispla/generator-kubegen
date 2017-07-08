@@ -6,6 +6,7 @@ var assert = require('yeoman-assert');
 var path = require('path');
 var yaml = require('yamljs');
 var expect = require('expect');
+var touch = require('touch');
 
 describe('Replication Controller without Ingress scenarios', function () {
 
@@ -415,23 +416,14 @@ describe('Spawn apply command with Deployment', function () {
     });
 });
 
-describe('Spawn delete command with Deployment', function () {
+describe('Spawn delete command with Deployment generation tests', function () {
 
     beforeEach(function () {
         return helpers.run(path.join(__dirname, '../generators/app'))
             .withArguments(['--delete'])
             .withPrompts({
                 name: 'nginx',
-                namespace: 'default',
-                podControllerType: 'Deployment',
-                image: 'nginx',
-                replicas: 1,
-                containerPort: 80,
-                servicePort: 80,
-                shouldExpose: 'yes',
-                host: 'nginx.ingress.com',
-                path: '/',
-                ingressPort: 80
+                namespace: 'default'
             });
     });    
 
@@ -450,4 +442,26 @@ describe('Spawn delete command with Deployment', function () {
     it('File deployment.yml is not generated', function () {
         assert.noFile(['deployment.yml']);
     });
+
+});
+
+describe('Spawn delete command with Deployment generation tests', function () {  
+
+    it ('Iterate over existing files spawning the delete command for each', function() {         
+
+        helpers.run(path.join(__dirname, '../generators/app'))
+            .inTmpDir(function(dir) {
+                var filename = path.join(dir, 'deployment.yml');
+                touch.sync(filename);
+            })        
+            .withArguments(['--delete'])
+            .withPrompts({
+                name: 'nginx',
+                namespace: 'default'
+            })
+            .then(function() {        
+                assert.file('deployment.yml');
+            });
+    });
+
 });
