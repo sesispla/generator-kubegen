@@ -11,8 +11,6 @@ module.exports = class extends Generator {
 
     constructor(args, opts) {
         super(args, opts);
-        this.argument('create', { required: false });
-        this.argument('delete', { required: false });
         this.argument('apply', { required: false });
     }
 
@@ -76,15 +74,9 @@ module.exports = class extends Generator {
     conflicts() {}
 
     install() {
-        if (this.options.create) {
-            common.spawnKubectlCommand(this, this.destinationRoot(), "create");
-        }
-        else if (this.options.delete) {
-            common.spawnKubectlCommand(this, this.destinationRoot(), "delete");
-        }
-        else if (this.options.apply) {
+        if (this.options.apply) {
             common.spawnKubectlCommand(this, this.destinationRoot(), "apply");
-        }        
+        }
     }
 
     end() {}
