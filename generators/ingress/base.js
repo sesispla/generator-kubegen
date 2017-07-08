@@ -12,6 +12,9 @@ module.exports = {
                 name: answers.name,
                 namespace: answers.namespace
             },
+            annotations: {
+                "kubernetes.io/ingress.class": answers.ingressType
+            },
             spec: {
                 rules: [{
                     // host: answers.host,
@@ -42,6 +45,12 @@ module.exports = {
             type: 'list',
             message: '(Ingress) Would like to expose the service out of the cluster?',
             choices: ['yes', 'no']
+        }, {
+            name: 'ingressType',
+            type: 'list',
+            message: '(Ingress) Which class of expose would you like?',
+            choices: ['external', 'internal'],
+            default: 'external'
         }, {
             name: 'host',
             type: 'input',
