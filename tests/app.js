@@ -6,6 +6,7 @@ var assert = require('yeoman-assert');
 var path = require('path');
 var yaml = require('yamljs');
 var expect = require('expect');
+var touch = require('touch');
 
 describe('Replication Controller without Ingress scenarios', function () {
 
@@ -72,6 +73,7 @@ describe('Replication Controller with Ingress scenarios', function () {
                 containerPort: 80,
                 servicePort: 80,
                 shouldExpose: 'yes',
+                ingressType: 'external',
                 host: 'nginx.ingress.com',
                 path: '/',
                 ingressPort: 80
@@ -109,6 +111,9 @@ describe('Replication Controller with Ingress scenarios', function () {
         var ing = yaml.load('ing.yml');
         expect(ing.apiVersion).toBe('extensions/v1beta1');
         expect(ing.kind).toBe('Ingress');
+        expect(ing.metadata.annotations).toExist("No annotations found for ing.yml");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toExist("No kubernetes.io/ingress class found");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toBe("external", "kubernetes.io/ingress class should be 'external'");
         expect(ing.metadata.name).toBe('nginx');
         expect(ing.metadata.namespace).toBe('default');
         expect(ing.spec.rules).toExist('Expected rules to exist');
@@ -190,6 +195,7 @@ describe('Deployment with Ingress scenarios', function () {
                 containerPort: 80,
                 servicePort: 80,
                 shouldExpose: 'yes',
+                ingressType: 'internal',
                 host: 'nginx.ingress.com',
                 path: '/',
                 ingressPort: 80
@@ -219,6 +225,9 @@ describe('Deployment with Ingress scenarios', function () {
         expect(ing.kind).toBe('Ingress');
         expect(ing.metadata.name).toBe('nginx');
         expect(ing.metadata.namespace).toBe('default');
+        expect(ing.metadata.annotations).toExist("No annotations found for ing.yml");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toExist("No kubernetes.io/ingress class found");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toBe("internal", "kubernetes.io/ingress class should be 'internal'");
         expect(ing.spec.rules).toExist('Expected rules to exist');
         expect(ing.spec.rules[0].host).toBe('nginx.ingress.com');
         expect(ing.spec.rules[0].http.paths[0].path).toBe('/');
@@ -254,6 +263,7 @@ describe('Ingress with no host', function () {
                 containerPort: 80,
                 servicePort: 80,
                 shouldExpose: 'yes',
+                ingressType: 'external',
                 path: '/',
                 ingressPort: 80
             });
@@ -282,6 +292,9 @@ describe('Ingress with no host', function () {
         expect(ing.kind).toBe('Ingress');
         expect(ing.metadata.name).toBe('nginx');
         expect(ing.metadata.namespace).toBe('default');
+        expect(ing.metadata.annotations).toExist("No annotations found for ing.yml");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toExist("No kubernetes.io/ingress class found");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toBe("external", "kubernetes.io/ingress class should be 'external'");        
         expect(ing.spec.rules).toExist('Expected rules to exist');
         expect(ing.spec.rules[0].host).toNotExist();
         expect(ing.spec.rules[0].http.paths[0].path).toBe('/');
@@ -392,6 +405,7 @@ describe('Spawn apply command with Deployment', function () {
                 containerPort: 80,
                 servicePort: 80,
                 shouldExpose: 'yes',
+                ingressType: 'external',
                 host: 'nginx.ingress.com',
                 path: '/',
                 ingressPort: 80
@@ -412,42 +426,5 @@ describe('Spawn apply command with Deployment', function () {
 
     it('File deployment.yml is generated', function () {
         assert.file(['deployment.yml']);
-    });
-});
-
-describe('Spawn delete command with Deployment', function () {
-
-    beforeEach(function () {
-        return helpers.run(path.join(__dirname, '../generators/app'))
-            .withArguments(['--delete'])
-            .withPrompts({
-                name: 'nginx',
-                namespace: 'default',
-                podControllerType: 'Deployment',
-                image: 'nginx',
-                replicas: 1,
-                containerPort: 80,
-                servicePort: 80,
-                shouldExpose: 'yes',
-                host: 'nginx.ingress.com',
-                path: '/',
-                ingressPort: 80
-            });
-    });    
-
-    it('File rc.yml is not generated', function () {
-        assert.noFile(['rc.yml']);
-    });
-
-    it('File svc.yml is not generated', function () {
-        assert.noFile(['svc.yml']);
-    });
-
-    it('File ing.yml is not generated', function () {
-        assert.noFile(['ing.yml']);
-    });
-
-    it('File deployment.yml is not generated', function () {
-        assert.noFile(['deployment.yml']);
     });
 });

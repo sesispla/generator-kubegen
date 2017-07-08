@@ -30,13 +30,9 @@ module.exports = {
             validate: val.isString
         }];
 
-        return prompts;        
+        return prompts;
     },
-    spawnKubectlCommand(generator, folder, command) {     
-        fs.readdir(folder, (err, files) => {
-            files.forEach(file => {
-                generator.spawnCommandSync("kubectl",[command, "-f", file]);
-            });
-        })
+    spawnKubectlCommand(generator, fileOrFolder, command) {
+        generator.spawnCommandSync("kubectl",[command, "-f", fileOrFolder]);
     }
 };
