@@ -10,10 +10,10 @@ module.exports = {
             kind: 'Ingress',
             metadata: {
                 name: answers.name,
-                namespace: answers.namespace
-            },
-            annotations: {
-                "kubernetes.io/ingress.class": answers.ingressType
+                namespace: answers.namespace,
+                annotations: {
+                    "kubernetes.io/ingress.class": answers.ingressType
+                },
             },
             spec: {
                 rules: [{
