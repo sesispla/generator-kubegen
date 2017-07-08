@@ -263,7 +263,7 @@ describe('Ingress with no host', function () {
                 containerPort: 80,
                 servicePort: 80,
                 shouldExpose: 'yes',
-                ingressType: 'external',
+                ingressType: 'nginx',
                 path: '/',
                 ingressPort: 80
             });
@@ -294,7 +294,7 @@ describe('Ingress with no host', function () {
         expect(ing.metadata.namespace).toBe('default');
         expect(ing.metadata.annotations).toExist("No annotations found for ing.yml");
         expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toExist("No kubernetes.io/ingress class found");
-        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toBe("external", "kubernetes.io/ingress class should be 'external'");        
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toBe("nginx", "kubernetes.io/ingress class should be 'nginx'");
         expect(ing.spec.rules).toExist('Expected rules to exist');
         expect(ing.spec.rules[0].host).toNotExist();
         expect(ing.spec.rules[0].http.paths[0].path).toBe('/');

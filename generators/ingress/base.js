@@ -49,7 +49,7 @@ module.exports = {
             name: 'ingressType',
             type: 'list',
             message: '(Ingress) Which class of expose would you like?',
-            choices: ['external', 'internal'],
+            choices: ['external', 'internal', 'nginx'],
             default: 'external'
         }, {
             name: 'host',
