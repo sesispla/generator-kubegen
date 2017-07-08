@@ -14,5 +14,15 @@
         ],
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen"
+    },{
+        "type": "node",
+        "request": "launch",
+        "name": "Mocha test",
+        "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+        "args": [
+            "./tests/*.js"
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen"
     }]
 }
