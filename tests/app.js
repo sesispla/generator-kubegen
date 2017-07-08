@@ -111,9 +111,9 @@ describe('Replication Controller with Ingress scenarios', function () {
         var ing = yaml.load('ing.yml');
         expect(ing.apiVersion).toBe('extensions/v1beta1');
         expect(ing.kind).toBe('Ingress');
-        expect (ing.annotations).toExist("No annotations found for ing.yml");
-        expect(ing.annotations["kubernetes.io/ingress.class"]).toExist("No kubernetes.io/ingress class found");
-        expect(ing.annotations["kubernetes.io/ingress.class"]).toBe("external", "kubernetes.io/ingress class should be 'external'");
+        expect(ing.metadata.annotations).toExist("No annotations found for ing.yml");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toExist("No kubernetes.io/ingress class found");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toBe("external", "kubernetes.io/ingress class should be 'external'");
         expect(ing.metadata.name).toBe('nginx');
         expect(ing.metadata.namespace).toBe('default');
         expect(ing.spec.rules).toExist('Expected rules to exist');
@@ -225,9 +225,9 @@ describe('Deployment with Ingress scenarios', function () {
         expect(ing.kind).toBe('Ingress');
         expect(ing.metadata.name).toBe('nginx');
         expect(ing.metadata.namespace).toBe('default');
-        expect (ing.annotations).toExist("No annotations found for ing.yml");
-        expect(ing.annotations["kubernetes.io/ingress.class"]).toExist("No kubernetes.io/ingress class found");
-        expect(ing.annotations["kubernetes.io/ingress.class"]).toBe("internal", "kubernetes.io/ingress class should be 'internal'");
+        expect(ing.metadata.annotations).toExist("No annotations found for ing.yml");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toExist("No kubernetes.io/ingress class found");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toBe("internal", "kubernetes.io/ingress class should be 'internal'");
         expect(ing.spec.rules).toExist('Expected rules to exist');
         expect(ing.spec.rules[0].host).toBe('nginx.ingress.com');
         expect(ing.spec.rules[0].http.paths[0].path).toBe('/');
@@ -292,9 +292,9 @@ describe('Ingress with no host', function () {
         expect(ing.kind).toBe('Ingress');
         expect(ing.metadata.name).toBe('nginx');
         expect(ing.metadata.namespace).toBe('default');
-        expect (ing.annotations).toExist("No annotations found for ing.yml");
-        expect(ing.annotations["kubernetes.io/ingress.class"]).toExist("No kubernetes.io/ingress class found");
-        expect(ing.annotations["kubernetes.io/ingress.class"]).toBe("external", "kubernetes.io/ingress class should be 'external'");        
+        expect(ing.metadata.annotations).toExist("No annotations found for ing.yml");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toExist("No kubernetes.io/ingress class found");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toBe("external", "kubernetes.io/ingress class should be 'external'");        
         expect(ing.spec.rules).toExist('Expected rules to exist');
         expect(ing.spec.rules[0].host).toNotExist();
         expect(ing.spec.rules[0].http.paths[0].path).toBe('/');
