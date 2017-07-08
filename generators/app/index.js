@@ -20,9 +20,7 @@ module.exports = class extends Generator {
 
     prompting() {
 
-        var prompts = common.getPrompts();
-        if (!this.options.delete){        
-            prompts = prompts
+        var prompts = common.getPrompts()
             .concat([{
                 name: 'podControllerType',
                 type: 'list',
@@ -32,8 +30,7 @@ module.exports = class extends Generator {
             .concat(deployment.getPrompts())
             .concat(rc.getPrompts())
             .concat(service.getPrompts())
-        .concat(ingress.getPrompts());
-        }
+        .concat(ingress.getPrompts());    
 
         return this.prompt(prompts).then((answers) => {
             this.answers = answers;
@@ -47,12 +44,6 @@ module.exports = class extends Generator {
 
     writing() {
         this.destinationRoot("./" + this.answers.name);
-
-        if (this.options.delete)
-        {
-            return;
-        }
-                
         switch (this.answers.podControllerType) {
             case "Deployment":
                 deployment.write(this.fs, this.answers);
@@ -68,7 +59,7 @@ module.exports = class extends Generator {
         service.write(this.fs, this.answers);
         if (this.answers.shouldExpose) {
             ingress.write(this.fs, this.answers);
-        }        
+        }
     }
 
     conflicts() {}

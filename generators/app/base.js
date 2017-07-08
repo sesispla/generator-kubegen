@@ -33,16 +33,6 @@ module.exports = {
         return prompts;
     },
     spawnKubectlCommand(generator, fileOrFolder, command) {
-        if (command === 'delete') {
-            fs.readdir(fileOrFolder, (err, files) => {
-                files.forEach(file => {
-                    generator.spawnCommandSync("kubectl", [command, "-f", file]);
-                });
-            });
-        }
-        else {
-            generator.spawnCommandSync("kubectl",[command, "-f", fileOrFolder]);            
-        }
-
+        generator.spawnCommandSync("kubectl",[command, "-f", fileOrFolder]);
     }
 };
