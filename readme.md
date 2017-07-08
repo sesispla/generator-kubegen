@@ -21,16 +21,13 @@ npm install generator-kubegen
 
 Quite easy! The follwing commands are available at the moment:
 
-| Command                | Description                                                                                         | Arguments                              |
-| ---------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| yo kubegen             | Starts a full Kubernetes file generation wizard. All generated files are stored in a new folder.    | --apply: Spawns a "kubectl apply -f " to all files generated immediately <br> --create: Spawns a "kubectl create -f " to all files generated immediately <br> --delete:  Spawns a "kubectl delete -f " to all files generated immediately |
-| yo kubegen:deployment  | Starts the Deployment subgenerator. 'deployment.yml' file is created, in the current folder.        |
-| yo kubegen:rc          | Starts the Replication Controller subgenerator. 'rc.yml' file is created, in the current folder.    |
-| yo kubegen:service     | Starts the Service subgenerator. 'service.yml' file is created, in the current folder.              |
-| yo kubegen:ingress     | Starts the Replication Controller subgenerator. 'deployment.yml' file is created, in the current folder.   |                                 |
-| yo kubegen:apply <folder> | Spawns a kubectl apply -f file to all files present in the given folder                          | Optional: The folder where the command should be spawned |
-| yo kubegen:create <folder> | Spawns a kubectl create -f file to all files present in the given folder                        | Optional: The folder where the command should be spawned |
-| yo kubegen:delete <folder> | Spawns a kubectl delete -f file to all files present in the given folder                        | Optional: The folder where the command should be spawned |
+| Command                | Description                                                                                                | Arguments                                                                |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| yo kubegen             | Starts a full Kubernetes file generation wizard. All generated files are stored in a new folder.           | --apply: Spawns a "kubectl apply -f " to all files generated immediately |
+| yo kubegen:deployment  | Starts the Deployment subgenerator. 'deployment.yml' file is created, in the current folder.               |                                                                          |
+| yo kubegen:rc          | Starts the Replication Controller subgenerator. 'rc.yml' file is created, in the current folder.           |                                                                          |
+| yo kubegen:service     | Starts the Service subgenerator. 'service.yml' file is created, in the current folder.                     |                                                                          |
+| yo kubegen:ingress     | Starts the Replication Controller subgenerator. 'deployment.yml' file is created, in the current folder.   |                                                                          |
 
 ```bash
 yo kubegen

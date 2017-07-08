@@ -6,6 +6,7 @@ var assert = require('yeoman-assert');
 var path = require('path');
 var yaml = require('yamljs');
 var expect = require('expect');
+var touch = require('touch');
 
 describe('Replication Controller without Ingress scenarios', function () {
 
@@ -425,43 +426,5 @@ describe('Spawn apply command with Deployment', function () {
 
     it('File deployment.yml is generated', function () {
         assert.file(['deployment.yml']);
-    });
-});
-
-describe('Spawn delete command with Deployment', function () {
-
-    beforeEach(function () {
-        return helpers.run(path.join(__dirname, '../generators/app'))
-            .withArguments(['--delete'])
-            .withPrompts({
-                name: 'nginx',
-                namespace: 'default',
-                podControllerType: 'Deployment',
-                image: 'nginx',
-                replicas: 1,
-                containerPort: 80,
-                servicePort: 80,
-                shouldExpose: 'yes',
-                ingressType: 'external',
-                host: 'nginx.ingress.com',
-                path: '/',
-                ingressPort: 80
-            });
-    });    
-
-    it('File rc.yml is not generated', function () {
-        assert.noFile(['rc.yml']);
-    });
-
-    it('File svc.yml is not generated', function () {
-        assert.noFile(['svc.yml']);
-    });
-
-    it('File ing.yml is not generated', function () {
-        assert.noFile(['ing.yml']);
-    });
-
-    it('File deployment.yml is not generated', function () {
-        assert.noFile(['deployment.yml']);
     });
 });
