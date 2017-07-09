@@ -14,7 +14,7 @@ kubegen is a [Yeoman](http://yeoman.io) generator, so you'll need to have [NodeJ
 To install kubegen, you need to execute the following command:
 
 ```bash
-npm install generator-kubegen
+npm install -g generator-kubegen
 ```
 
 # Usage
