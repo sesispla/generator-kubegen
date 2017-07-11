@@ -1,6 +1,6 @@
 {
   "name": "generator-kubegen",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "A Kubernetes code generation tool that deals with boilerplate code and let you focus on the important details",
   "main": "index.js",
   "scripts": {
