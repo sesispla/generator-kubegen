@@ -28,6 +28,7 @@ Quite easy! The follwing commands are available at the moment:
 | yo kubegen:rc          | Starts the Replication Controller subgenerator. 'rc.yml' file is created, in the current folder.           |                                                                          |
 | yo kubegen:service     | Starts the Service subgenerator. 'service.yml' file is created, in the current folder.                     |                                                                          |
 | yo kubegen:ingress     | Starts the Replication Controller subgenerator. 'deployment.yml' file is created, in the current folder.   |                                                                          |
+| yo kubegen:lego        | Starts the Let's Encrypt subgenerator. All the internal components required by a TLS Ingress with kube-lego is created by this subgen |                                               | 
 
 ```bash
 yo kubegen
