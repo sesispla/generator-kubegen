@@ -42,18 +42,17 @@ yo kubegen
 Welcome to Kubernetes Generator (kubegen)!
 ? How the service should be named? nginx
 ? In which Namespace should be deployed? default
-? Which type of Pod controller mechanism whould you like to use? Deployment
-? (Deployment) Which Docker image should the Deployment use? nginx
-? (Deployment) How much container replicas should be created? 1
+? Which type of Pod controller mechanism whould you like to use? Replication Controller
+? (Replication Controller) Which Docker image should the Deployment use? nginx
+? (Replication Controller) How much container replicas should be created? 1
 ? (Service) In which port is the Container listening? 80
 ? (Service) In which port should the Service listen? 80
 ? (Ingress) Would like to expose the service out of the cluster? yes
-? (Ingress) Does the service have a hostname? nginx.sesispla.net
-? (Ingress) Ingress root path? /
-? (Ingress) In which port should the Ingress listen? 80
-   create deployment.yml
-   create svc.yml
-   create ing.yml
+? (Ingress) Which class of expose would you like?
+❯ external
+  internal
+  nginx
+  tls-lego
 ```
 
 # Contributing
