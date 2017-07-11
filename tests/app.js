@@ -253,6 +253,79 @@ describe('Deployment with Ingress scenarios', function () {
     });
 });
 
+describe('Deployment with TLS-Ingress', function () {
+
+    beforeEach(function () {
+        return helpers.run(path.join(__dirname, '../generators/app'))
+            .withPrompts({
+                name: 'nginx',
+                namespace: 'default',
+                podControllerType: 'Deployment',
+                image: 'nginx',
+                replicas: 1,
+                containerPort: 80,
+                servicePort: 80,
+                shouldExpose: 'yes',
+                ingressType: 'tls-lego',
+                legoSecretName: 'nginx-secret',
+                host: 'nginx.ingress.com',
+                path: '/',
+                ingressPort: 80
+            });
+    });    
+
+    it('File rc.yml is not generated', function () {
+        assert.noFile(['rc.yml']);
+    });
+
+    it('File svc.yml is generated and filled in', function () {
+        assert.file(['svc.yml']);
+        var svc = yaml.load('svc.yml');
+        expect(svc.apiVersion).toBe('v1');
+        expect(svc.kind).toBe('Service');
+        expect(svc.metadata.name).toBe('nginx');
+        expect(svc.metadata.namespace).toBe('default');
+        expect(svc.spec.ports[0].port).toBe(80);
+        expect(svc.spec.ports[0].targetPort).toBe(80);
+        expect(svc.spec.selector.app).toBe('nginx');
+    });
+
+    it('File ing.yml is generated and filled in', function () {
+        assert.file(['ing.yml']);
+        var ing = yaml.load('ing.yml');
+        expect(ing.apiVersion).toBe('extensions/v1beta1');
+        expect(ing.kind).toBe('Ingress');
+        expect(ing.metadata.name).toBe('nginx');
+        expect(ing.metadata.namespace).toBe('default');
+        expect(ing.metadata.annotations).toExist("No annotations found for ing.yml");
+        expect(ing.metadata.annotations["kubernetes.io/ingress.class"]).toNotExist("ingress.class should not be present in TLS scenarios");
+        expect(ing.metadata.annotations["kubernetes.io/tls-acme"]).toExist("No kubernetes.io/tls-acme class found");
+        expect(ing.metadata.annotations["kubernetes.io/tls-acme"]).toBe("true", "kubernetes.io/tls-acme class should be 'true'");
+        expect(ing.spec.rules).toExist('Expected rules to exist');
+        expect(ing.spec.rules[0].host).toBe('nginx.ingress.com');
+        expect(ing.spec.rules[0].http.paths[0].path).toBe('/');
+        expect(ing.spec.rules[0].http.paths[0].backend.serviceName).toBe('nginx');
+        expect(ing.spec.rules[0].http.paths[0].backend.servicePort).toBe(80);
+        expect(ing.spec.tls).toExist('Expected TLS to exist');
+        expect(ing.spec.tls[0].hosts[0]).toBe('nginx.ingress.com');
+        expect(ing.spec.tls[0].secretName).toBe('nginx-secret');
+    });
+
+    it('File deployment.yml is generated and filled in', function () {
+        assert.file(['deployment.yml']);
+        var deployment = yaml.load('deployment.yml');
+        expect(deployment.apiVersion).toBe('extensions/v1beta1');
+        expect(deployment.kind).toBe('Deployment');
+        expect(deployment.metadata.labels.name).toBe('nginx');
+        expect(deployment.metadata.name).toBe('nginx');
+        expect(deployment.metadata.namespace).toBe('default');
+        expect(deployment.spec.replicas).toBe(1);
+        expect(deployment.spec.template.metadata.labels.app).toBe('nginx');
+        expect(deployment.spec.template.spec.containers[0].name).toBe('nginx');
+        expect(deployment.spec.template.spec.containers[0].image).toBe('nginx');
+    });
+});
+
 describe('Ingress with no host', function () {
 
     beforeEach(function () {
