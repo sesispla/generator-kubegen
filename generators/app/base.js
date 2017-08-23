@@ -13,7 +13,7 @@ module.exports = {
         generator.log(" |  .  \\  |  `--'  | |  |_)  | |  |____ |  |__| | |  |____ |  |\\   | ");
         generator.log(" |__|\\__\\  \\______/  |______/  |_______| \\______| |_______||__| \\__| ");
         generator.log(" ");
-        generator.log('Welcome to Kubernetes Generator (kubegen)!');
+        generator.log("Welcome to Kubernetes Generator (kubegen)!");
     },
     getPrompts() {
         var prompts = [{
