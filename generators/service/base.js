@@ -1,14 +1,14 @@
 "use strict";
 
-var yaml = require('yamljs');
-const val = require('../validations.js');
+var yaml = require("yamljs");
+const val = require("../validations.js");
 
 module.exports = {
     write: function (fs, answers, inline = 10) {
         
         var service = {
-            apiVersion: 'v1',
-            kind: 'Service',
+            apiVersion: "v1",
+            kind: "Service",
             metadata: {
                 name: answers.name,
                 namespace: answers.namespace
@@ -25,20 +25,20 @@ module.exports = {
         };
 
         var yamlContent = yaml.stringify(service, inline);
-        fs.write('svc.yml', yamlContent);
+        fs.write("svc.yml", yamlContent);
     },
     getPrompts: function () {
         var prompts = [{
-            name: 'containerPort',
-            type: 'input',
-            message: '(Service) In which port is the Container listening?',
+            name: "containerPort",
+            type: "input",
+            message: "(Service) In which port is the Container listening?",
             default: 80,
             validate: val.isNumber,
             filter: val.parseInteger
         }, {
-            name: 'servicePort',
-            type: 'input',
-            message: '(Service) In which port should the Service listen?',
+            name: "servicePort",
+            type: "input",
+            message: "(Service) In which port should the Service listen?",
             default: 80,
             validate: val.isNumber,
             filter: val.parseInteger

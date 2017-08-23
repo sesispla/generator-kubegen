@@ -1,7 +1,7 @@
 "use strict";
 
-var yaml = require('yamljs');
-const val = require('../validations.js');
+var yaml = require("yamljs");
+const val = require("../validations.js");
 
 module.exports = {
     write: function (fs, answers, inline = 10) {
@@ -91,27 +91,27 @@ module.exports = {
         };
 
         var deploymentYml = yaml.stringify(deployment, inline);
-        fs.write('deployment.yml', deploymentYml);
+        fs.write("deployment.yml", deploymentYml);
         var configMapYml = yaml.stringify(configMap, inline);
-        fs.write('configmap.yml', configMapYml);
+        fs.write("configmap.yml", configMapYml);
     },
     getPrompts: function () {
         var prompts = [{
-            type: 'input',
-            name: 'image',
-            message: '(Let\'s Encrypt) Which Docker image should the Deployment use?',
-            default: 'jetstack/kube-lego:0.1.4',
+            type: "input",
+            name: "image",
+            message: "(Let\"s Encrypt) Which Docker image should the Deployment use?",
+            default: "jetstack/kube-lego:0.1.4",
             validate: val.isString
         }, {
-            type: 'input',
-            name: 'lego.mail',
-            message: '(Let\'s Encrypt) Your Let\'s Encrypt e-mail?',
+            type: "input",
+            name: "lego.mail",
+            message: "(Let\"s Encrypt) Your Let\"s Encrypt e-mail?",
             validate: val.isString
         }, {
-            type: 'input',
-            name: 'lego.url',
-            message: '(Let\'s Encrypt) Is the Let\'s Encrypt service URL correct?',
-            default: 'https://acme-v01.api.letsencrypt.org/directory'
+            type: "input",
+            name: "lego.url",
+            message: "(Let\"s Encrypt) Is the Let\"s Encrypt service URL correct?",
+            default: "https://acme-v01.api.letsencrypt.org/directory"
         }];
 
         return prompts;

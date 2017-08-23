@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-var Generator = require('yeoman-generator');
-var common = require('../app/base.js');
-var deployment = require('./base.js');
+var Generator = require("yeoman-generator");
+var common = require("../app/base.js");
+var deployment = require("./base.js");
 
 
 module.exports = class extends Generator {

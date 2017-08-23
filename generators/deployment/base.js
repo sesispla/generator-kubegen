@@ -1,13 +1,13 @@
 "use strict";
 
-var yaml = require('yamljs');
-var val = require('../validations.js');
+var yaml = require("yamljs");
+var val = require("../validations.js");
 
 module.exports = {
     write: function (fs, answers, inline = 10) {
         var deployment = {
-            apiVersion: 'extensions/v1beta1',
-            kind: 'Deployment',
+            apiVersion: "extensions/v1beta1",
+            kind: "Deployment",
             metadata: {
                 labels: {
                     name: answers.name
@@ -34,19 +34,19 @@ module.exports = {
         };
 
         var yamlContent = yaml.stringify(deployment, inline);
-        fs.write('deployment.yml', yamlContent);
+        fs.write("deployment.yml", yamlContent);
     },
     getPrompts: function () {
         var prompts = [{
-            type: 'input',
-            name: 'image',
-            message: '(Deployment) Which Docker image should the Deployment use?',
+            type: "input",
+            name: "image",
+            message: "(Deployment) Which Docker image should the Deployment use?",
             when: this.when,
             validate: val.isString
         }, {
-            type: 'input',
-            name: 'replicas',
-            message: '(Deployment) How much container replicas should be created?',
+            type: "input",
+            name: "replicas",
+            message: "(Deployment) How much container replicas should be created?",
             default: 1,
             validate: val.isNumber,
             when: this.when,
@@ -56,6 +56,6 @@ module.exports = {
         return prompts;
     },
     when: function (answers) {
-        return answers.podControllerType === 'Deployment' || !answers.podControllerType;
+        return answers.podControllerType === "Deployment" || !answers.podControllerType;
     }
 }

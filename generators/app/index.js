@@ -1,17 +1,17 @@
-'use strict';
+"use strict";
 
-var Generator = require('yeoman-generator');
-var common = require('./base.js');
-var ingress = require('../ingress/base.js');
-var deployment = require('../deployment/base.js');
-var rc = require('../replication-controller/base.js');
-var service = require('../service/base.js');
+var Generator = require("yeoman-generator");
+var common = require("./base.js");
+var ingress = require("../ingress/base.js");
+var deployment = require("../deployment/base.js");
+var rc = require("../replication-controller/base.js");
+var service = require("../service/base.js");
 
 module.exports = class extends Generator {
 
     constructor(args, opts) {
         super(args, opts);
-        this.argument('apply', { required: false });
+        this.argument("apply", { required: false });
     }
 
     initializing() {
@@ -22,10 +22,10 @@ module.exports = class extends Generator {
 
         var prompts = common.getPrompts()
             .concat([{
-                name: 'podControllerType',
-                type: 'list',
-                message: 'Which type of Pod controller mechanism whould you like to use?',
-                choices: ['Deployment', 'Replication Controller', 'Other']
+                name: "podControllerType",
+                type: "list",
+                message: "Which type of Pod controller mechanism whould you like to use?",
+                choices: ["Deployment", "Replication Controller", "Other"]
             }])
             .concat(deployment.getPrompts())
             .concat(rc.getPrompts())
@@ -34,7 +34,7 @@ module.exports = class extends Generator {
 
         return this.prompt(prompts).then((answers) => {
             this.answers = answers;
-            answers.shouldExpose = answers.shouldExpose === 'yes';
+            answers.shouldExpose = answers.shouldExpose === "yes";
         });
     }
 
