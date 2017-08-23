@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha ./tests/*.js",
     "cover": "istanbul cover _mocha ./tests/*.js",
+    "codacy-cover": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | ./node_modules/.bin/codacy-coverage",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
@@ -25,8 +26,10 @@
   },
   "homepage": "https://github.com/sesispla/generator-kubegen#readme",
   "dependencies": {
-    "yeoman-generator": "^1.1.1",
-    "yamljs": "^0.3.0"
+    "codacy-coverage": "^2.0.2",
+    "mocha-lcov-reporter": "^1.3.0",
+    "yamljs": "^0.3.0",
+    "yeoman-generator": "^1.1.1"
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
