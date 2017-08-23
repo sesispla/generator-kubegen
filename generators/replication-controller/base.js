@@ -58,6 +58,6 @@ module.exports = {
         return prompts;
     },
     when: function(answers) {
-        return answers.podControllerType === 'Replication Controller' || !answers.podControllerType;;
+        return answers.podControllerType === 'Replication Controller' || !answers.podControllerType;
     }    
 }
